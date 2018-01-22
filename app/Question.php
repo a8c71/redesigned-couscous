@@ -46,7 +46,7 @@ class Question extends Model
    */
   public function answers()
   {
-  	return $this->hasMany('App\Comment')->where('solution', 'NO')->orderBy('score', 'desc');
+  	return $this->hasMany('App\Comment')->where('solution', 'NO');
   }
 
   public function tags()
@@ -65,7 +65,7 @@ class Question extends Model
 
   public function getSolvedByAttribute()
   {
-  	return $this->comments->where('solution', 'YES')->first();
+  	return $this->answers->where('solution', 'YES')->first();
   }
 
   
