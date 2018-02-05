@@ -22,12 +22,9 @@ class Question extends Model
   	'deleted_at'
   ];
 
-  protected $with = [
-  	'answers',
-  	'tags'
-	];
   protected $appends = [
-  	'solved_by'
+  	'solved_by',
+  	'view_count'
   ];
 
   /**
@@ -46,15 +43,15 @@ class Question extends Model
    */
   public function answers()
   {
-  	return $this->hasMany('App\Comment')->where('solution', 'NO');
+  	return $this->hasMany('App\Comment');
   }
 
   public function tags()
   {
-  	return $this->belongsToMany('App\Tag')->withTimestamps();;
+  	return $this->belongsToMany('App\Tag')->withTimestamps();
   }
 
-  public function hits()
+  public function views()
   {
     return $this->belongsToMany('App\User')->withTimestamps();
   }
@@ -66,6 +63,11 @@ class Question extends Model
   public function getSolvedByAttribute()
   {
   	return $this->answers->where('solution', 'YES')->first();
+  }
+
+  public function getViewCountAttribute()
+  {
+  	return $this->views->count();
   }
 
   

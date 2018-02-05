@@ -24,7 +24,7 @@ class CreateCommentsTable extends Migration
             $table->foreign('comment_id')->references('id')->on('comments');
 
             $table->text('body');
-            $table->enum('solution', ['YES', 'NO']);
+            $table->enum('solution', ['YES', 'NO'])->default('NO');
 
             $table->timestamps();
             $table->softDeletes();

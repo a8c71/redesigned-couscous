@@ -27,7 +27,7 @@ class Comment extends Model
   ];
 
   protected $with = [
-  	'votes'
+  	'votes:value,user_id,comment_id'
   ];
 
   public function question()

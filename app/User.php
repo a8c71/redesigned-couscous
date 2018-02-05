@@ -43,7 +43,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Vote');
     }
 
-    public function hits()
+    public function views()
     {
         return $this->belongsToMany('App\Question')->withTimestamps();
     }

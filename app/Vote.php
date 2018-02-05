@@ -22,6 +22,10 @@ class Vote extends Model
 		'deleted_at'
 	];
 
+	protected static function boot()
+  {
+    parent::boot();
+  }
   public function comment()
   {
   	return $this->belongsTo('App\Comment');

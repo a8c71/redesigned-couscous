@@ -22,10 +22,6 @@ class Tag extends Model
   	'deleted_at'
   ];
 
-  protected $with = [
-  	'questions'
-  ];
-
   public function questions()
   {
   	return $this->belongsToMany('App\Question')->withTimestamps();
