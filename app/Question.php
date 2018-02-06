@@ -24,7 +24,7 @@ class Question extends Model
 
   protected $appends = [
   	'solved_by',
-  	'view_count'
+  	// 'view_count'
   ];
 
   /**
