@@ -19,7 +19,9 @@ class QuestionTest extends TestCase
 
   	$response->assertJson(['questions' => array()])
   		->assertJsonCount(2, 'questions')
-  		->assertJsonStructure(['questions' => [['body', 'title']]]);
+  		->assertJsonStructure([
+  			'questions' => [['body', 'title', 'answers_count']]
+  		]);
 	}
 
 	public function testGetQuestionIncreasesViewsOnce()
@@ -85,6 +87,9 @@ class QuestionTest extends TestCase
 			'user_id' => $user->id
 		]);
 		$question->answers->add($answers);
+		$answers[0]->comments->add(factory(\App\Comment::class, 3)->create([
+			'comment_id' => $answers[0]->id
+		]));
 		$tags = factory(\App\Tag::class, 3)->create();
 		$question->tags()->attach($tags);
 		
@@ -94,7 +99,36 @@ class QuestionTest extends TestCase
     $response->assertStatus(200)
     	->assertJson(['question' => array()])
     	->assertJsonCount(3, 'question.tags')
-    	->assertJsonCount(5, 'question.answers');
+    	->assertJsonCount(5, 'question.answers')
+    	->assertJsonStructure([
+    		'question' => [
+    			'id',
+    			'body',
+    		  'answers' => [[
+  					'id',
+  					'body',
+  					'score',
+  					'comments' => [[
+  						'id',
+  						'body',
+  						'score',
+  						'user' => [
+  							'id',
+  							'nickname'
+  						]
+  					]],
+  					'user' => [
+							'id',
+							'nickname'
+						]
+  				]],
+  				'tags' => [['name']],
+  				'user' => [
+  					'id',
+  					'nickname'
+  				]
+    		]
+    	]);
   }
 
 	public function testDeleteQuestion()

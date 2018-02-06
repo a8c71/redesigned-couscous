@@ -136,7 +136,7 @@ class AnswerTest extends TestCase
     	]);
   }
 
-  public function testUserVoteOnAnswerCountsOnce()
+/*  public function testUserVoteOnAnswerCountsOnce()
   {
   	$user = factory(\App\User::class)->create();
 		$question = factory(\App\Question::class)->create();
@@ -167,7 +167,7 @@ class AnswerTest extends TestCase
 
 		$this->assertEquals(5, $answer->score);
   }
-
+*/
   public function testQuestionOwnerCanChooseCorrectAnswer()
   {
   	$user = factory(\App\User::class)->create();
