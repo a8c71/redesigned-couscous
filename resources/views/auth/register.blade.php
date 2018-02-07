@@ -39,6 +39,34 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
+                            <label for="nickname" class="col-md-4 control-label">Nickname</label>
+
+                            <div class="col-md-6">
+                                <input id="nickname" type="nickname" class="form-control" name="nickname" value="{{ old('nickname') }}" required>
+
+                                @if ($errors->has('nickname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nickname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>                        
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="phone" class="form-control" name="phone" value="{{ old('phone') }}" required>
+
+                                @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 

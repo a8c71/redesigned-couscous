@@ -14,6 +14,8 @@ class TagsController extends Controller
 
   public function indexWithQuestions()
   {
-  	return response()->json(['tags' => Tag::with('questions')->get()]);
+  	return response()->json(['tags' => Tag::with(['questions' => function ($q) {
+  		$q->with('user:id,nickname');
+  	}])->get()]);
   }
 }

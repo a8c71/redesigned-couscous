@@ -28,6 +28,16 @@ class TagTest extends TestCase
 		$response = $this->json('GET', "/api/tags/questions");
     $response->assertStatus(200)
     	->assertJson(['tags' => array()])
-    	->assertJsonStructure(['tags' => [['name', 'questions' => [['id', 'title', 'body']]]]]);
+    	->assertJsonStructure([
+    		'tags' => [[
+    			'name', 
+    			'questions' => [[
+    				'id', 
+    				'title', 
+    				'body',
+    				'user' => ['id', 'nickname']
+    			]]
+    		]]
+    	]);
   }
 }

@@ -16,7 +16,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return response()->json(['questions' => Question::withCount('answers')->get()]);
+        return response()->json(['questions' => Question::withCount('answers')->with(['user:id,nickname', 'tags:name'])->get()]);
     }
 
     /**
@@ -57,10 +57,10 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        if (($user = request()->user()) && 
+        /*if (($user = request()->user()) && 
             !$user->views()->exists(['question_id' => $question->id])
         ) $user->views()->attach($question->id);
-        $question->refresh();
+        $question->refresh();*/
         $question->load(['answers' => function ($answers) {
             $answers->with(['comments' => function($comments) {
                 $comments->with(['user:id,nickname']);
